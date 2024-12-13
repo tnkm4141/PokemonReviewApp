@@ -62,7 +62,7 @@ namespace PokemonReviewApp.Controllers
         [HttpPost]
         public IActionResult CreateOwnerWithPokemon([FromBody] CreateOwnerWithPokemonDto ownerWithPokemonCreateDto)
         {
-
+            _logger.LogDebug("Debug oldu mu ");
             _logger.LogInformation("Owner creation started.");
 
             if (ownerWithPokemonCreateDto == null)

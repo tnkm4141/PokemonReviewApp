@@ -29,6 +29,11 @@ builder.Services.AddControllers();
 
 // Serilog Konfigürasyonu
 Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug() // Varsayýlan log seviyesi
+    .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning) // Microsoft loglarý için seviye
+    .MinimumLevel.Override("PokemonReviewApp.Controllers", Serilog.Events.LogEventLevel.Debug) // Controller log seviyesi
+    .MinimumLevel.Override("PokemonReviewApp.Services", Serilog.Events.LogEventLevel.Warning) // Servis log seviyesi
+    .MinimumLevel.Override("PokemonReviewApp.Repository", Serilog.Events.LogEventLevel.Information) // Repository log seviyesi
     .WriteTo.Console() // Konsola yazma
     .WriteTo.File(
             path: "logs/log-.txt",           // Dosya yolu ve adý
