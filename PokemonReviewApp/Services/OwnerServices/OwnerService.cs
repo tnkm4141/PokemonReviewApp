@@ -10,6 +10,7 @@ using PokemonReviewApp.Repository;
 using System.Transactions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using PokemonReviewApp.Aspect;
 
 namespace PokemonReviewApp.Services.OwnerServices
 {
@@ -69,6 +70,9 @@ namespace PokemonReviewApp.Services.OwnerServices
             // Repository'ye Owner modelini gönderiyoruz
             return _ownerRepository.CreateOwner(owner);
         }
+
+
+        [Log]
         // Transaction ile hem Owner hem Pokemon oluşturma işlemi
         public bool CreateOwnerWithPokemon(OwnerCreateDto ownerCreateDto, PokemonCreateDto pokemonCreateDto)
         {

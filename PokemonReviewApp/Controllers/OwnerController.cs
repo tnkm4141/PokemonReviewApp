@@ -8,6 +8,7 @@ using PokemonReviewApp.Interfaces;
 using PokemonReviewApp.Models;
 using PokemonReviewApp.Repository;
 using PokemonReviewApp.Services.OwnerServices;
+using PokemonReviewApp.Aspect;
 
 namespace PokemonReviewApp.Controllers
 {
@@ -60,6 +61,7 @@ namespace PokemonReviewApp.Controllers
             return Ok(pokemons);
         }
         [HttpPost]
+        [Log]
         public IActionResult CreateOwnerWithPokemon([FromBody] CreateOwnerWithPokemonDto ownerWithPokemonCreateDto)
         {
             _logger.LogDebug("Debug oldu mu ");

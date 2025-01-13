@@ -17,7 +17,7 @@ using System;
 using System.Text.Json.Serialization;
 using PokemonReviewApp.Dtos.PokemonDtos;
 using Serilog;
-using System.Text.Json.Serialization;
+using PokemonReviewApp.Aspect;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +32,7 @@ Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug() // Varsayýlan log seviyesi
     .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning) // Microsoft loglarý için seviye
     .MinimumLevel.Override("PokemonReviewApp.Controllers", Serilog.Events.LogEventLevel.Debug) // Controller log seviyesi
-    .MinimumLevel.Override("PokemonReviewApp.Services", Serilog.Events.LogEventLevel.Warning) // Servis log seviyesi
+    .MinimumLevel.Override("PokemonReviewApp.Services", Serilog.Events.LogEventLevel.Debug) // Servis log seviyesi
     .MinimumLevel.Override("PokemonReviewApp.Repository", Serilog.Events.LogEventLevel.Information) // Repository log seviyesi
     .WriteTo.Console() // Konsola yazma
     .WriteTo.File(
@@ -44,6 +44,8 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Logging.ClearProviders(); // Varsayýlan saðlayýcýlarý temizle
 builder.Logging.AddSerilog(Log.Logger); // Serilog'u ekle
+
+builder.Services.AddProxiedServices();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
